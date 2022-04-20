@@ -3,5 +3,3 @@ Python-flask based web application to manage "Paying Guest" accomodation busines
 
 ## How it works?
 It a hosted webapp that can be accessed from any latest web browers.
-
-
