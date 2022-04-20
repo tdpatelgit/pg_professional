@@ -18,13 +18,7 @@ def home():
 @app.route("/guest")
 def guest():
 	if "user" in session:
-		name = session["user"]
-		today = date.today()
-		d = today.strftime("%d")
-		M = today.strftime("%B")
-		Y = today.strftime("%Y")
-		D = str(datetime.today().strftime('%A'))
-		return render_template("welcome.html", name = name, d = d, D = D[:3], M = M[:3], Y = Y)
+		return render_template("welcome.html")
 	else:
 		return render_template("login.html")
 
@@ -45,6 +39,7 @@ def login():
 		code = request.form["pass"]
 		session["user"] = user
 		session["code"] = code
+		session["login_at"] = datetime.now()
 		for n,p in nap.items() :
 			if session["code"] == p and session["user"] == n:
 				flash("You have logged in successfully", "info")

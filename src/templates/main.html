@@ -1,84 +1,97 @@
 <!doctype htl>
 <HTML>
-	<HEAD>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<TITLE>
-			Welcome To PG Professional
-		</TITLE>
-	</HEAD>
-	<BODY>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <a class="navbar-brand" href="admin">PG Professional</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="home">Home<span class="sr-only">(current)</span></a>
-		      </li>
-		    </ul>
-		  </div>
+<HEAD>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<TITLE>
+		Welcome To PG Professional
+	</TITLE>
+</HEAD>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="rent">packages<span class="sr-only">(current)</span></a>
-		      </li>
-		    </ul>
-		  </div>
+<BODY>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="admin">PG Professional</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="login">My Rents<span class="sr-only">(current)</span></a>
-		      </li>
-		    </ul>
-		  </div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="home">Home<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
 
-		    {% if "user" in session %}
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="logout">Logout<span class="sr-only">(current)</span></a>
-					</li>
-					</ul>
-				</div>
-			{% else %}
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
-					</li>
-					</ul>
-				</div>
-			{% endif %}
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="rent">packages<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="login">My Rents<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+
+		{% if "user" in session %}
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="logout">Logout<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
 					<a class="nav-link" href="login">
-						{% block welcome%}
-						{% endblock %}
-					<span class="sr-only">(current)</span></a>
+						<p align="right">Welcome {{ session['user'] }}<br>
+							{{ session['login_at'].strftime("%b %d, %Y %I:%M %p") }}
+						</p>
+						<span class="sr-only">(current)</span>
+					</a>
 				</li>
-				</ul>
-			</div>
-		</nav>
+			</ul>
+		</div>
+		{% else %}
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+	</nav>
 
 
-		{% with messages = get_flashed_messages() %}
-			{% if messages %}
-				{% for msg in messages %}
-					<p>{{msg}}</p>
-				{% endfor %}
-			{% endif %}
-		{% endwith %}
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for msg in messages %}
+	<p>{{msg}}</p>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
 
-		{% block info %}
-		{% endblock %}
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	</BODY>
+	{% block info %}
+	{% endblock %}
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</BODY>
+
 </HTML>
