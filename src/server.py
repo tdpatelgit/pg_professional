@@ -10,6 +10,7 @@ app.secret_key = "AbCdEfG"
 app.permanent_session_lifetime = timedelta(minutes=3)
 nap = {'Tejas':'abcd'}
 
+@app.route("/")
 @app.route("/home")
 def home():
 	return render_template("home.html")
