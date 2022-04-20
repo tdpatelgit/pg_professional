@@ -1,4 +1,4 @@
-name: PyLint
+name: Code Style
 
 on: [push]
 
@@ -19,6 +19,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pipenv
         pipenv install --dev
-    - name: Analysing the code with pylint
+    - name: Analysing the code with pycodestyle
       run: |
-        pipenv run pylint src/
+        pipenv run pycodestyle src/
