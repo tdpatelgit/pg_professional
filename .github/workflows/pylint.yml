@@ -21,5 +21,4 @@ jobs:
         pipenv install --dev
     - name: Analysing the code with pylint
       run: |
-        export PYTHONPATH=$PYTHONPATH.
         pipenv run pylint src/

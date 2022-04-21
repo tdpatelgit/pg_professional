@@ -39,7 +39,6 @@ pipenv run pydocstyle src/
 Run the below command to perform linter check.
 
 ```bash
-export PYTHONPATH=.
 pipenv run pylint src/
 ```
 
