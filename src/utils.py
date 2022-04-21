@@ -2,8 +2,9 @@
 import os
 import logging
 
+
 def setup_log(filename: str):
-    """Setup logging format."""
+    """Set logging format."""
     logging.basicConfig(
         # filename='pg_pro.log',
         level=logging.DEBUG,

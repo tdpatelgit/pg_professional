@@ -51,7 +51,7 @@ def rent():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     """Login route."""
-    logging.info(f'Route :: /login {request.method}')
+    logging.info('Route :: /login %s', request.method)
     if request.method == 'POST':
         session.permanent = True
         user = request.form['nm']
