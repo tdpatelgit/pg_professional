@@ -1,15 +1,14 @@
 """Main server file."""
 import os
-from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta, datetime
+from flask import Flask, redirect, url_for, render_template, request, session, flash
 
 template_dir = os.path.abspath('./src/templates')
-print(f'template_dir: {template_dir}')
 app = Flask(__name__, template_folder=template_dir)
 
 app.secret_key = 'AbCdEfG'
 app.permanent_session_lifetime = timedelta(minutes=3)
-nap = {'Tejas': 'abcd'}
+auth_data = {'Tejas': 'abcd'}
 
 
 @app.route('/')
@@ -44,19 +43,17 @@ def rent():
 def login():
     """Login route."""
     if request.method == 'POST':
-        print('Login POST')
         session.permanent = True
         user = request.form['nm']
         code = request.form['pass']
         session['user'] = user
         session['code'] = code
         session['login_at'] = datetime.now()
-        for n, p in nap.items():
-            if session['code'] == p and session['user'] == n:
+        for username, password in auth_data.items():
+            if session['user'] == username and session['code'] == password:
                 flash('You have logged in successfully', 'info')
                 return redirect(url_for('guest'))
 
-        print('Invalid credentials')
         flash(['Invalid login credentials'])
         return render_template('login.html')
 
