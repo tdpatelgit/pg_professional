@@ -1,65 +1,78 @@
+"""Main server file."""
 import os
 from flask import Flask, redirect, url_for, render_template, request, session, flash
-from datetime import timedelta, date, datetime
+from datetime import timedelta, datetime
 
 template_dir = os.path.abspath('./src/templates')
 print(f'template_dir: {template_dir}')
 app = Flask(__name__, template_folder=template_dir)
 
-app.secret_key = "AbCdEfG"
+app.secret_key = 'AbCdEfG'
 app.permanent_session_lifetime = timedelta(minutes=3)
-nap = {'Tejas':'abcd'}
+nap = {'Tejas': 'abcd'}
 
-@app.route("/")
-@app.route("/home")
+
+@app.route('/')
+@app.route('/home')
 def home():
-	return render_template("home.html")
+    """Home route."""
+    return render_template('home.html')
 
-@app.route("/guest")
+
+@app.route('/guest')
 def guest():
-	if "user" in session:
-		return render_template("welcome.html")
-	else:
-		return render_template("login.html")
+    """Gest route."""
+    if 'user' in session:
+        return render_template('welcome.html')
 
-@app.route("/admin")
+    return render_template('login.html')
+
+
+@app.route('/admin')
 def admin():
-	return render_template("admin.html")
+    """Admin route."""
+    return render_template('admin.html')
 
-@app.route("/rent")
+
+@app.route('/rent')
 def rent():
-	return render_template("rent.html")
+    """Rent route."""
+    return render_template('rent.html')
 
-@app.route("/login", methods = ['POST', 'GET'])
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-	if request.method == "POST":
-		print('Login POST')
-		session.permanent = True
-		user = request.form["nm"]
-		code = request.form["pass"]
-		session["user"] = user
-		session["code"] = code
-		session["login_at"] = datetime.now()
-		for n,p in nap.items() :
-			if session["code"] == p and session["user"] == n:
-				flash("You have logged in successfully", "info")
-				return redirect(url_for("guest"))
+    """Login route."""
+    if request.method == 'POST':
+        print('Login POST')
+        session.permanent = True
+        user = request.form['nm']
+        code = request.form['pass']
+        session['user'] = user
+        session['code'] = code
+        session['login_at'] = datetime.now()
+        for n, p in nap.items():
+            if session['code'] == p and session['user'] == n:
+                flash('You have logged in successfully', 'info')
+                return redirect(url_for('guest'))
 
-		print('Invalid credentials')
-		flash(["Invalid login credentials"])
-		return render_template("login.html")
-	else:
-		return render_template("login.html")
+        print('Invalid credentials')
+        flash(['Invalid login credentials'])
+        return render_template('login.html')
+
+    return render_template('login.html')
 
 
-@app.route("/logout")
+@app.route('/logout')
 def logout():
-	if "user" in session:
-		session.pop("user", None)
-		flash("You have logged out successfully", "info")
-		return render_template("home.html")
-	else:
-		return render_template("home.html")
+    """Logout route."""
+    if 'user' in session:
+        session.pop('user', None)
+        flash('You have logged out successfully', 'info')
+        return render_template('home.html')
+
+    return render_template('home.html')
+
 
 if __name__ == '__main__':
-	app.run(debug=True)
+    app.run(debug=True)
