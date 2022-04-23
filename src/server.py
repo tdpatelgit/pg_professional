@@ -17,35 +17,31 @@ auth_data = {'Tejas': 'abcd'}
 
 
 @app.route('/')
-@app.route('/home')
-def home():
+def route_home():
     """Home route."""
-    logging.info('Route :: / or /home')
+    logging.info('Route :: /')
     return render_template('home.html')
 
 
-@app.route('/guest')
-def guest():
-    """Gest route."""
-    logging.info('Route :: /guest')
-    if 'user' in session:
-        return render_template('welcome.html')
-
-    return render_template('login.html')
+@app.route('/about')
+def route_about():
+    """About route."""
+    logging.info('Route :: /about')
+    return render_template('about.html')
 
 
-@app.route('/admin')
-def admin():
-    """Admin route."""
-    logging.info('Route :: /admin')
-    return render_template('admin.html')
+@app.route('/amenities')
+def route_amenities():
+    """Amenities route."""
+    logging.info('Route :: /amenities')
+    return render_template('amenities.html')
 
 
-@app.route('/rent')
-def rent():
-    """Rent route."""
-    logging.info('Route :: /rent')
-    return render_template('rent.html')
+@app.route('/packages')
+def route_packages():
+    """Package route."""
+    logging.info('Route :: /packages')
+    return render_template('packages.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -53,18 +49,18 @@ def login():
     """Login route."""
     logging.info('Route :: /login %s', request.method)
     if request.method == 'POST':
-        session.permanent = True
-        user = request.form['nm']
-        code = request.form['pass']
-        session['user'] = user
-        session['code'] = code
-        session['login_at'] = datetime.now()
-        for username, password in auth_data.items():
-            if session['user'] == username and session['code'] == password:
-                flash('You have logged in successfully', 'info')
-                return redirect(url_for('guest'))
+        frm_user_name = request.form.get('user_name', '')
+        frm_login_password = request.form.get('login_password', '')
+        for auth_user_name, auth_login_password in auth_data.items():
+            if frm_user_name == auth_user_name and frm_login_password == auth_login_password:
+                session.permanent = True
+                session['user'] = frm_user_name
+                session['login_at'] = datetime.now()
 
-        flash(['Invalid login credentials'])
+                flash('You have logged in successfully', 'success')
+                return redirect(url_for('route_home'))
+
+        flash('Invalid login credentials, Please try again', 'danger')
         return render_template('login.html')
 
     return render_template('login.html')

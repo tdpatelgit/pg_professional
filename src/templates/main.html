@@ -11,78 +11,120 @@
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="admin">PG Professional</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		<a class="navbar-brand" href="/">PG Professional</a>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="home">Home<span class="sr-only">(current)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="/">Home</a>
 				</li>
-			</ul>
-		</div>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="rent">packages<span class="sr-only">(current)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="/about">About</a>
 				</li>
-			</ul>
-		</div>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="login">My Rents<span class="sr-only">(current)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="/amenities">Amenities</a>
 				</li>
-			</ul>
-		</div>
-
-		{% if "user" in session %}
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="logout">Logout<span class="sr-only">(current)</span></a>
+				<li class="nav-item">
+					<a class="nav-link" href="/packages">Packages</a>
 				</li>
-			</ul>
-		</div>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="login">
-						<p align="right">Welcome {{ session['user'] }}<br>
-							{{ session['login_at'].strftime("%b %d, %Y %I:%M %p") }}
-						</p>
-						<span class="sr-only">(current)</span>
-					</a>
+				{% if "user" in session %}
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Logout</a>
 				</li>
-			</ul>
-		</div>
-		{% else %}
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
 				</li>
+				{% endif %}
 			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				{% if "user" in session %}
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<p align="right">Welcome {{ session['user'] }}<br>
+						{{ session['login_at'].strftime("%b %d, %Y %I:%M %p") }}
+					</p>
+				</div>
+				{% else %}
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					&nbsp; </div>
+				{% endif %}
+			</form>
 		</div>
-		{% endif %}
 	</nav>
 
+	<main role="main" class="container">
+		<br/>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+		{% for category, message in messages %}
+		<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+			{{ message }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
 
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	{% for msg in messages %}
-	<p>{{msg}}</p>
-	{% endfor %}
-	{% endif %}
-	{% endwith %}
+		{% block info %}
+		{% endblock %}
+		<br/>
+		<br/>
+	</main>
 
-	{% block info %}
-	{% endblock %}
+	<!-- Start of footer -->
+	<footer style="background-color: #eee6d3;">
+		<div class="container p-4">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 mb-4">
+					<h5 class="mb-3 text-dark">Footer Note</h5>
+					<p>
+						This is footer note to show some message to the user about PG.
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-4">
+					<h5 class="mb-3 text-dark">Link</h5>
+					<ul class="list-unstyled mb-0">
+						<li class="mb-1">
+							<a href="#!" style="color: #4f4f4f;">FAQ</a>
+						</li>
+						<li class="mb-1">
+							<a href="#!" style="color: #4f4f4f;">Classes</a>
+						</li>
+						<li class="mb-1">
+							<a href="#!" style="color: #4f4f4f;">Pricing</a>
+						</li>
+						<li>
+							<a href="#!" style="color: #4f4f4f;">Safety</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-6 mb-4">
+					<h5 class="mb-1 text-dark">Normal Operating Hours</h5>
+					<table class="table" style="border-color: #666;">
+						<tbody>
+							<tr>
+								<td>Mon - Fri:</td>
+								<td>7am - 10:30pm</td>
+							</tr>
+							<tr>
+								<td>Sat - Sun:</td>
+								<td>8am - 11pm</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+			© 2020 Copyright:
+			<a class="text-dark" href="https://pgprofessional.com/">PGProfessional.com</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- End of footer -->
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -92,6 +134,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+	<script>
+		// Set active class to nav bar item based on current url.
+		$(function () {
+			$('nav li a').filter(function () {
+				return this.href === location.href;
+			}).addClass('active');
+		});
+
+		$(document).ready(function () {
+			// Auto fade all alerts
+			setTimeout(function () { $(".alert").alert('close'); }, 5000)
+		});
+	</script>
 </body>
 
 </HTML>
