@@ -1,0 +1,33 @@
+
+mkdir pg_pro
+cd pg_pro
+
+virtualenv venv
+source venv/bin/activate
+python --version
+python -m pip install --upgrade pip
+
+pip install Django
+python -m django --version
+
+# Create new app
+django-admin startproject pg_pro
+
+
+cd pg_pro/
+python manage.py runserver
+python manage.py runserver 8080
+
+
+# Create blank migration for users and groups
+python manage.py migrate
+python manage.py makemigrations
+python manage.py createsuperuser
+
+# Run server with super admin login and user management.
+python manage.py runserver
+
+
+python manage.py startapp pg
+python manage.py makemigrations pg
+python manage.py migrate pg
