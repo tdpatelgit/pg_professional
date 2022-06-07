@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block info %}
+
+<h2>{{ payment.date }}</h2>
+<p>From {{ payment.source_account_name }} => {{ payment.destination_account_name }} </p>
+<p>Amount <b>Rs. {{ payment.amount }}</b></p>
+
+{% endblock %}

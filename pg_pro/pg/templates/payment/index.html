@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block info %}
+
+{% if latest_payment_list %}
+    <ul>
+    {% for payment in latest_payment_list %}
+        <li><a href="{% url 'payment_detail' payment.id %}">{{ payment }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No payments are available.</p>
+{% endif %}
+
+{% endblock %}

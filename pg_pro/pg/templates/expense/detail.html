@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block info %}
+
+<h2>{{ expense.date }} :: {{ expense.title }}</h2>
+<p>{{ expense.type }} :: {{ expense.vendor.name }}</p>
+<p>Rs. {{ expense.amount }}</p>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block info %}
+
+<h2>{{ stay.from_date }} - {{ stay.to_date }}</h2>
+<p>{{ stay.guest }}</p>
+<p>Amount <b>Rs. {{ stay.amount_paid }}</b></p>
+
+{% endblock %}

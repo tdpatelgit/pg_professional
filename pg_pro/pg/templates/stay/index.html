@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block info %}
+
+{% if latest_stay_list %}
+    <ul>
+    {% for stay in latest_stay_list %}
+        <li><a href="{% url 'stay_detail' stay.id %}">{{ stay }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No stays are available.</p>
+{% endif %}
+
+{% endblock %}
