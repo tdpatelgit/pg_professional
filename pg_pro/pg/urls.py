@@ -1,16 +1,25 @@
-from django.urls import path
+from django.urls import include, path
+from django.contrib.auth import views as auth_views
 
 from . import views
 
 urlpatterns = [
     # /pg/home
+    path('', views.website_home, name='website_home'),
     path('home/', views.website_home, name='website_home'),
+
+    # login / logout
+    path('login/', auth_views.LoginView.as_view(template_name='website/login.html'), name='website_login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='website/home.html'), name='website_logout'),
 
     # /pg/amenities
     path('amenities/', views.website_amenities, name='website_amenities'),
 
     # /pg/packages
     path('packages/', views.website_packages, name='website_packages'),
+
+    # /pg/user/<id>
+    path('user/<int:user_id>/', views.user_detail, name='user_detail'),
 
     # /pg/guest
     path('guest/', views.guest_index, name='guest_index'),

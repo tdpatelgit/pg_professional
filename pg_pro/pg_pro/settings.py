@@ -123,3 +123,7 @@ STATIC_URL = os.path.join(BASE_DIR, 'static/')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'website_login'
+LOGIN_REDIRECT_URL = 'website_home'
+LOGOUT_URL = 'website_logout'
