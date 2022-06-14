@@ -1,6 +1,7 @@
 from typing import Optional, Iterable
 from django.db import models
 from django.contrib.auth.models import User
+from rest_framework import serializers, viewsets
 
 
 VEHICLE_TYPE = {
@@ -31,6 +32,18 @@ class Guest(models.Model):
 
     def __str__(self) -> str:
         return f'{self.full_name} (+{self.mobile_number})'
+
+
+# Serializers define the API representation.
+class GuestSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Guest
+        fields = ['url', 'full_name', 'mobile_number', 'rental']
+
+# ViewSets define the view behavior.
+class GuestViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
 
 
 IDENTITY_TYPE = {
