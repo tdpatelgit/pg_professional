@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Guest, Payment, Stay, Vendor, Expense
 
+
 # @login_required(login_url='/login/')
 def website_home(request):
     template = loader.get_template('website/home.html')
@@ -32,6 +33,14 @@ def guest_index(request):
         'latest_guest_list': latest_guest_list,
     }
     return HttpResponse(template.render(context, request))
+
+
+@login_required(login_url='/login/')
+def guest_add(request):
+    template = loader.get_template('guest/add.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
 
 @login_required(login_url='/login/')
 def guest_detail(request, guest_id):

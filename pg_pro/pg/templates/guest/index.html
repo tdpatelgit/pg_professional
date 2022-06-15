@@ -2,6 +2,10 @@
 
 {% block info %}
 
+<span style="float:right;">
+    <a href="{% url 'guest_add' %}"><h5>Add Guest</h5></a>
+</span>
+
 {% if latest_guest_list %}
     <ul>
     {% for guest in latest_guest_list %}
