@@ -1,5 +1,6 @@
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
+from .models import Guest
 
 from . import views
 
@@ -23,6 +24,9 @@ urlpatterns = [
 
     # /pg/guest
     path('guest/', views.guest_index, name='guest_index'),
+
+    # /pg/guest/add
+    path('guest/add', views.guest_add, name='guest_add'),
 
     # /pg/guest/<id>
     path('guest/<int:guest_id>/', views.guest_detail, name='guest_detail'),
