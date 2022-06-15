@@ -19,6 +19,7 @@ from django.urls import include, path
 from django.conf.urls.static import static
 
 from django.contrib.auth.models import User
+from rest_framework.authtoken import views
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
@@ -40,6 +41,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pg.urls')),
-    path('api/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token, name='api-token-auth'),
+    # path('api/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
 ] + static('static/', document_root=STATIC_URL)

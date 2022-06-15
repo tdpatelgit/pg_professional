@@ -11,7 +11,7 @@ router.register(r'guests', models.GuestViewSet)
 
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
 
     # /pg/home
     path('', views.website_home, name='website_home'),
