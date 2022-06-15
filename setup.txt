@@ -8,6 +8,12 @@ python --version
 python -m pip install --upgrade pip
 
 pip install Django
+
+# Required for REST Api
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+
 python -m django --version
 
 # Create new app

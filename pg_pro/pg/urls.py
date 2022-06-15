@@ -3,8 +3,17 @@ from django.contrib.auth import views as auth_views
 from .models import Guest
 
 from . import views
+from . import models
+from rest_framework import routers
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'guests', models.GuestViewSet)
+
 
 urlpatterns = [
+    path('api/', include(router.urls)),
+
     # /pg/home
     path('', views.website_home, name='website_home'),
     path('home/', views.website_home, name='website_home'),
